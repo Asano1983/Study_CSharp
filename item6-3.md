@@ -34,14 +34,14 @@
 </a>
 ```
 
-`asp-controller`‘®«‚ðŽw’è‚·‚é‚ÆA‘¼‚ÌƒRƒ“ƒgƒ[ƒ‰[Actionƒƒ\ƒbƒh‚ðŒÄ‚Ño‚·‚±‚Æ‚ª‚Å‚«‚éB
+`asp-controller`‘®«‚ðŽw’è‚·‚é‚ÆA‘¼‚ÌƒRƒ“ƒgƒ[ƒ‰[`Action`ƒƒ\ƒbƒh‚ðŒÄ‚Ño‚·‚±‚Æ‚ª‚Å‚«‚éB
 
-’FˆêŒ©A’˜ŽÒ‚ÌID‚ÍModel.Author.Id‚ÅŽæ“¾‚Å‚«‚é‚Ì‚ÅABookƒNƒ‰ƒX‚ªAuthorId‚ðŽ‚Â‚Ì‚Íç’·‚È‹C‚ª‚µ‚½‚Ì‚Å‚·‚ªA
+’FˆêŒ©A’˜ŽÒ‚ÌID‚Í`Model.Author.Id`‚ÅŽæ“¾‚Å‚«‚é‚Ì‚ÅA`Book`ƒNƒ‰ƒX‚ª`AuthorId`‚ðŽ‚Â‚Ì‚Íç’·‚È‹C‚ª‚µ‚½‚Ì‚Å‚·‚ªA
 https://docs.microsoft.com/ja-jp/ef/core/modeling/relationships ‚É‚æ‚é‚Æ
 uˆË‘¶ƒGƒ“ƒeƒBƒeƒB ƒNƒ‰ƒX‚Å’è‹`‚³‚ê‚Ä‚¢‚éŠO•”ƒL[ ƒvƒƒpƒeƒB‚ðŽ‚Â‚±‚Æ‚ð‚¨Š©‚ß‚µ‚Ü‚·‚ªA‚±‚ê‚Í•K—v‚ ‚è‚Ü‚¹‚ñBv
 ‚ç‚µ‚¢‚Å‚·B
-AuthorId‚Íí‚ÉDB‚©‚çŽæ“¾‚·‚é‚Ì‚ÅiAuthor‚Íinclude‚µ‚È‚¢‚ÆDB‚©‚çŽæ“¾‚µ‚È‚¢‚Ì‚ÅjAˆÀ‘S‚È‹C‚à‚µ‚Ü‚·B
-‚Ü‚½ADBã‚ÍBookƒe[ƒuƒ‹‚ÉAuthorId—ñ‚ª‚ ‚é‚Ì‚ÅABookƒNƒ‰ƒX‚É‚à‚ ‚Á‚½•û‚ª•ª‚©‚è‚â‚·‚¢‚Ì‚©‚à‚µ‚ê‚Ü‚¹‚ñB
+`AuthorId`‚Íí‚ÉDB‚©‚çŽæ“¾‚·‚é‚Ì‚Åi`Author`‚Íinclude‚µ‚È‚¢‚ÆDB‚©‚çŽæ“¾‚µ‚È‚¢‚Ì‚ÅjAˆÀ‘S‚È‹C‚à‚µ‚Ü‚·B
+‚Ü‚½ADBã‚ÍBookƒe[ƒuƒ‹‚ÉAuthorId—ñ‚ª‚ ‚é‚Ì‚ÅA`Book`ƒNƒ‰ƒX‚É‚à‚ ‚Á‚½•û‚ª•ª‚©‚è‚â‚·‚¢‚Ì‚©‚à‚µ‚ê‚Ü‚¹‚ñB
 
 ### 6.3.4 ‘Ðƒy[ƒW‚ÌƒŒƒCƒAƒEƒg•ÏX
 
@@ -61,7 +61,7 @@ AuthorId‚Íí‚ÉDB‚©‚çŽæ“¾‚·‚é‚Ì‚ÅiAuthor‚Íinclude‚µ‚È‚¢‚ÆDB‚©‚çŽæ“¾‚µ‚È‚¢‚Ì‚Åj
 ````
 
 ‚³‚ç‚ÉƒŠƒXƒg6-16‚Ì(3)‚Ì‚æ‚¤‚ÉControllers/AuthorsController.cs‚ð•ÒW‚·‚éB
-iIncludeƒƒ\ƒbƒh‚ðŽg‚Á‚ÄAAuthor‚ðDB‚©‚çŽæ“¾‚·‚é‚Æ‚«‚ÉBookƒvƒƒpƒeƒB‚àŽæ“¾‚·‚éjB
+i`include`ƒƒ\ƒbƒh‚ðŽg‚Á‚ÄA`Author`‚ðDB‚©‚çŽæ“¾‚·‚é‚Æ‚«‚É`Book`ƒvƒƒpƒeƒB‚àŽæ“¾‚·‚éjB
 
 ```csharp
 var author = await _context.Author
@@ -70,11 +70,11 @@ var author = await _context.Author
     .SingleOrDefaultAsync(m => m.Id == id);
 ```
 
-’‚PFEF Core 1.0‚Ìê‡A6.2.3‚ÅŒ©‚½‚æ‚¤‚Éinclude‚ð•t‚¯‚È‚¢‚ÆBookƒvƒƒpƒeƒB‚Ì’l‚ªnull‚É‚È‚Á‚Ä‚µ‚Ü‚¤i¶¬‚³‚ê‚éhtmlã‚Å‚Í‹ó”’‚Å•\Ž¦jB
-includeƒƒ\ƒbƒh‚ðŽg‚¤‚ÆAAuthorŽæ“¾Žž‚ÉBookiƒiƒrƒQ[ƒVƒ‡ƒ“ƒvƒƒpƒeƒBj‚Ì“à—e‚àDB‚©‚çŽæ“¾‚·‚é‚æ‚¤‚ÈƒNƒGƒŠiSQL•¶j‚ª”­s‚³‚ê‚éB
+’‚PFEF Core 1.0‚Ìê‡A6.2.3‚ÅŒ©‚½‚æ‚¤‚É`include`‚ð•t‚¯‚È‚¢‚Æ`Book`ƒvƒƒpƒeƒB‚Ì’l‚ªnull‚É‚È‚Á‚Ä‚µ‚Ü‚¤i¶¬‚³‚ê‚éhtmlã‚Å‚Í‹ó”’‚Å•\Ž¦jB
+`include`ƒƒ\ƒbƒh‚ðŽg‚¤‚ÆA`Author`Žæ“¾Žž‚É`Book`ƒvƒƒpƒeƒBiƒiƒrƒQ[ƒVƒ‡ƒ“ƒvƒƒpƒeƒBj‚Ì“à—e‚àDB‚©‚çŽæ“¾‚·‚é‚æ‚¤‚ÈƒNƒGƒŠiSQL•¶j‚ª”­s‚³‚ê‚éB
 
 ’‚QFEF Core 2.1‚Å‚Í’x‰„“Ç‚Ýž‚Ý‚ª“±“ü‚³‚ê‚Ä‚¢‚é‚ªAŒø—¦‚É‚Í’ˆÓ‚ª•K—v‚Å‚ ‚ë‚¤B
-‚±‚Ì—á‚Ìê‡Ainclude‚ð•t‚¯‚é‚±‚Æ‚Åƒ‹[ƒv‚ÌŠO‘¤‚ÅiƒRƒ“ƒgƒ[ƒ‰[‘¤‚ÅjBook‚Ì“à—e‚ªDB‚©‚çŽæ“¾‚Å‚«‚Ä‚¢‚é‚ªA
+‚±‚Ì—á‚Ìê‡A`include`‚ð•t‚¯‚é‚±‚Æ‚Åƒ‹[ƒv‚ÌŠO‘¤‚ÅiƒRƒ“ƒgƒ[ƒ‰[‘¤‚Åj`Book`‚Ì“à—e‚ªDB‚©‚çŽæ“¾‚Å‚«‚Ä‚¢‚é‚ªA
 ’x‰„“Ç‚Ýž‚Ý‚É—Š‚é‚Æƒ‹[ƒv‚Ì“à‘¤‚ÅDB‚©‚çŽæ“¾‚·‚é‚±‚Æ‚É‚È‚éŒø—¦‚ªˆ«‚¢B
 Ú‚µ‚­‚Í
 https://docs.microsoft.com/ja-jp/ef/core/querying/related-data
@@ -86,7 +86,7 @@ https://docs.microsoft.com/ja-jp/ef/core/querying/related-data
 
 ’˜ŽÒƒy[ƒW‚Æ“¯—l‚ÉC³‚·‚éi—ªjB
 
-iinclude‚ðŽg‚¤‘ã‚í‚è‚ÉjControllerƒNƒ‰ƒX‚ÌDetailƒƒ\ƒbƒh‚ÅLINQ‚ðŽg‚Á‚Äì¬‚·‚é‚±‚Æ‚à‚Å‚«‚éB
+i`include`‚ðŽg‚¤‘ã‚í‚è‚Éj`Controller`ƒNƒ‰ƒX‚Ì`Detail`ƒƒ\ƒbƒh‚ÅLINQ‚ðŽg‚Á‚Äì¬‚·‚é‚±‚Æ‚à‚Å‚«‚éB
 
 ```csharp
 ViewData["Books"]
@@ -102,9 +102,9 @@ ViewData["Books"]
 ViewData["Books"] = _context.Book.Where(b => b.AuthorId == id.Value)
 ```
 
-Controller‚É‘Î‰ž‚µ‚È‚¢ModelƒNƒ‰ƒX‚ÌƒvƒƒpƒeƒB‚ðView‚Å•K—v‚Æ‚·‚é‚Æ‚«‚ÍAViewData‚âViewBag‚ðŽg‚Á‚ÄView‚É“n‚·B
+Controller‚É‘Î‰ž‚µ‚È‚¢ModelƒNƒ‰ƒX‚ÌƒvƒƒpƒeƒB‚ðView‚Å•K—v‚Æ‚·‚é‚Æ‚«‚ÍA`ViewData`‚â`ViewBag`‚ðŽg‚Á‚ÄView‚É“n‚·B
 
-’F‚Æ‚Í‚¢‚¦Šî–{“I‚É‚ÍModelƒNƒ‰ƒX‘¤‚ÉƒvƒƒpƒeƒB‚ðŽ‚½‚¹‚é‚×‚µ‚È‚Ì‚¾‚ë‚¤iViewData‚âViewBag‚ÍƒOƒ[ƒoƒ‹•Ï”‚È‚Ì‚Å——p‹Ö•¨jB
+’F‚Æ‚Í‚¢‚¦Šî–{“I‚É‚ÍModelƒNƒ‰ƒX‘¤‚ÉƒvƒƒpƒeƒB‚ðŽ‚½‚¹‚é‚×‚µ‚È‚Ì‚¾‚ë‚¤i`ViewData`‚â`ViewBag`‚ÍƒOƒ[ƒoƒ‹•Ï”‚È‚Ì‚Å——p‹Ö•¨jB
 
 ## 6.4 ˆê——ƒy[ƒW‚Ìƒy[ƒWƒ“ƒO‹@”\
 
