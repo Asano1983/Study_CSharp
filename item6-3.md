@@ -75,7 +75,7 @@ var author = await _context.Author
 Ú‚µ‚­‚Í
 https://docs.microsoft.com/ja-jp/ef/core/querying/related-data
 ‚ğQÆB
-EF Core 2.1‚Å‚Í’x‰„“Ç‚İ‚İ‚ª“±“ü‚³‚ê‚Ä‚¢‚é‚ªiEntity Framework 6‚Å‚àg‚¦‚é‚ªjAŒø—¦‚É‚Í’ˆÓ‚ª•K—v‚Å‚ ‚ë‚¤B
+EF Core 2.1‚Å‚Í’x‰„“Ç‚İ‚İ‚ª“±“ü‚³‚ê‚Ä‚¢‚é‚ªiEntity Framework‚È‚ç4‚Å‚àg‚¦‚é‚ªjAŒø—¦‚É‚Í’ˆÓ‚ª•K—v‚Å‚ ‚ë‚¤B
 
 ### 6.3.5 o”ÅĞƒy[ƒW‚ÌƒŒƒCƒAƒEƒg‚ğ•ÏX
 
@@ -96,4 +96,190 @@ Controller‚É‘Î‰‚µ‚È‚¢ModelƒNƒ‰ƒX‚ÌƒvƒƒpƒeƒB‚ğView‚Å•K—v‚Æ‚·‚é‚Æ‚«‚ÍAViewData‚
 
 ## 6.4 ˆê——ƒy[ƒW‚Ìƒy[ƒWƒ“ƒO‹@”\
 
+WebƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Å‚ÍAˆê——‚ğ•\¦‚·‚é‚Æ‚«‚É­‚µ’ˆÓ‚ª•K—v‚Å‚ ‚éB
+ƒf[ƒ^Œ”‚ª”çŒ‚É‹y‚Ô‚Æ‚«‚ÉA‚»‚Ì‚Ü‚Üˆê——‚ğ•\¦‚µ‚Ä‚µ‚Ü‚¤‚ÆƒT[ƒo[‚©‚ç‚Ì‰“š‚ª’x‚­‚È‚Á‚½‚èA
+ƒNƒ‰ƒCƒAƒ“ƒg‚Åƒf[ƒ^‚ğ•\¦‚Å‚«‚È‚¢ó‘Ô‚ÉŠ×‚Á‚Ä‚µ‚Ü‚¤B
+‚±‚Ì‚æ‚¤‚Èó‹µ‚ğ–h‚®‚½‚ß‚ÉAWebƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Å‚ÍA‚ ‚é’ö“xƒf[ƒ^Œ”‚ª‘½‚¢ê‡‚Íƒuƒ‰ƒEƒU[‚Å•\¦‚·‚éŒ”‚ği‚éB
+‚±‚ê‚ğuƒy[ƒWƒ“ƒO‹@”\v‚Æ‚¢‚¤B
+
+### 6.4.1 ƒy[ƒWƒ“ƒO‹@”\‚Ì‚È‚¢ó‘Ô
+
+}6-16 ƒf[ƒ^“]‘—‚ÌƒvƒƒZƒX‚ÌŠT—v‚ğQÆB
+‚Ç‚±‚ÅŒ”‚ği‚é‚Ì‚©‚ğl‚¦‚æ‚¤B
+
+### 6.4.2 Indexƒƒ\ƒbƒh‚Éƒy[ƒWƒ“ƒO‹@”\‚ğÀ‘•‚·‚é
+
+À‘•‚µ‚½‚à‚Ì‚ªƒŠƒXƒg6-20‚Å‚ ‚éB
+
+```csharp
+public async Task<IActionResult> Index(int? page) // (1)
+{
+    if (page == null) // (2)
+    {
+        page = 0;
+    }
+    int max = 5; // (3)
+
+    books = _context.Book // (4)
+        .Skip(max * page.Value).Take(max)
+        .Include(b => b.Author).Include(b => b.Publisher);
+
+    if (page.Value > 0) // (5)
+    {
+        ViewData["prev"] = page.Value - 1;
+    }
+    if (books.Count() >= max) // (6)
+    {
+        ViewData["next"] = page.Value + 1;
+        if (_context.Book.Skip(max * (page.Value + 1)).Take(max).Count() == 0) // (7)
+        {
+            ViewData["next"] = null;
+        }
+    }
+    ViewData["search"] = search;
+    return View(await books.ToListAsync()); // (8)
+}
+```
+
+- (1) Indexƒƒ\ƒbƒh‚Éint?Œ^‚Ìpageˆø”‚ğ’Ç‰ÁB
+- (2) `page == null`‚Ì‚Æ‚«‚Í`page = 0`‚É‚È‚é‚æ‚¤‚É‚µ‚ÄÅ‰‚Ìƒy[ƒW‚ª•\¦‚³‚ê‚é‚æ‚¤‚É‚·‚éB
+- (3) 1ƒy[ƒW‚É•\¦‚·‚éÅ‘å—v‘f”‚ğİ’èB
+- (4) `Skip`‚Æ`Take`‚ğg‚Á‚Äw’èƒy[ƒW‚Ìƒf[ƒ^‚Ì‚İ‚ğDB‚©‚çæ“¾B
+- (5) ‘O‚Ìƒy[ƒW‚ª‚ ‚é‚Æ‚«‚ÍprevƒŠƒ“ƒN—p‚Ì•Ï”`ViewData["prev"]`‚ğİ’èB
+- (6) (7) Ÿ‚Ìƒy[ƒW‚ª‚ ‚é‚Æ‚«‚ÍnextƒŠƒ“ƒN—p‚Ì•Ï”`ViewData["next"]`‚ğİ’èB
+- (8) ŒŸõŒ‹‰Ê‚ğIndexƒy[ƒWiViewj‚Éˆø‚«“n‚·
+
+### 6.4.3 Indexƒy[ƒW‚Éƒy[ƒWƒ“ƒO‚ÌƒŠƒ“ƒN‚ğ•t‚¯‚é
+
+Books/Index.cshtml‚à•ÒWB
+
+```cshtml
+
+<div>
+    @if (ViewBag.Prev != null) // (1)
+    {
+        <a asp-action="Index" asp-route-page="@ViewBag.Prev">prev</a> // (2)
+    }
+    else
+    {
+        <span>prev</span> // (3)
+    }
+    /
+    @if (ViewBag.Next != null) // (4)
+    {
+        <a asp-action="Index" asp-route-page="@ViewBag.Next">next</a>
+    }
+    else
+    {
+        <span>next</span>
+    }
+</div>
+```
+
+- (1) BooksController‘¤‚Å`ViewData["prev"]`‚ªİ’è‚³‚ê‚Ä‚¢‚ê‚ÎA‘Oƒy[ƒW‚ÌƒŠƒ“ƒN‚ğ•t‚¯‚éB
+- (2) asp-action, asp-route-page‘®«‚ğg‚Á‚ÄƒŠƒ“ƒN‚ğ•t‚¯‚éBhref‘®«‚ª http://localhost/Books/Index?page=ƒ‘Sƒy[ƒW”Ô†„ ‚É‚È‚éB
+- (3) `ViewData["prev"]`‚ªİ’è‚³‚ê‚Ä‚È‚¯‚ê‚ÎAƒŠƒ“ƒN‚Å‚Í‚È‚¢•¶š—ñ‚Æ‚µ‚Ä‚Ìuprevv‚¾‚¯‚ğ•\¦B
+- (4) Ÿƒy[ƒWƒŠƒ“ƒN‚à“¯—lB
+
+### 6.4.4 “®ì‚ğŠm”F‚·‚éB
+
+}6-17‚ğQÆB
+
+## 6.5 ˆê——ƒy[ƒW‚ğŒŸõ‚Åi‚è‚İ
+
+Indexƒy[ƒW‚É€–Ú‚Ìi‚è‚İ‚Ì‹@”\‚ğ•t‚¯‚éB
+ƒuƒ‰ƒEƒU[‚Å‘Ğ‚Ìƒ^ƒCƒgƒ‹iBook.Titlej‚Ìˆê•”‚ğ“ü—Í‚µ‚ÄA‚»‚ÌŒ‹‰Ê‚ª•\¦‚³‚ê‚é‚æ‚¤‚É‚·‚éB
+ŒŸõŒ‹‰Ê‚ÍIndexƒy[ƒW‚Å—˜—p‚µ‚Ä‚¢‚étableƒ^ƒO‚ğ‚»‚Ì‚Ü‚Ü—˜—p‚·‚é‚ªA
+¤•i‚ÌÊ^‚È‚Ç‚ğ•À‚×‚ÄŒŸõŒ‹‰Ê‚ÌƒŒƒCƒAƒEƒgƒy[ƒWiSearch.cshtml‚È‚Çj‚ğì‚é‚±‚Æ‚à‚ ‚éB
+
+### 6.5.1 Indexƒy[ƒW‚ÉŒŸõ—p‚ÌƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ•t‚¯‚é
+
+ƒuƒ‰ƒEƒU[‚Åi‚è‚İŒŸõ‚ğó‚¯•t‚¯‚é‚½‚ß‚ÉAƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğ’Ç‰Á‚·‚éiƒŠƒXƒg6-22jB
+ƒeƒLƒXƒgƒ{ƒbƒNƒX‚É–¼‚ÉŠÜ‚Ü‚ê‚é•¶š—ñ‚ğ“ü—Í‚µ‚ÄA[Filter]ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚µ‚Äi‚è‚İ‚ğÀs‚·‚éB
+
+```cshtml
+<form asp-action="Index" method="get">
+    Title: <input type="text" name="search" value="@ViewBag.Search" />
+    <input type="submit" value="Filter" />
+</form>
+```
+
+- (1) ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ğg‚¤‚Ì‚Åformƒ^ƒO‚ğg‚¤B
+- (2) ŒŸõ‚·‚é•¶š—ñ‚Íinputƒ^ƒO‚Åw’è‚·‚éBname‘®«‚É"search"‚Æw’è‚·‚é‚±‚Æ‚ÅABookControllerƒNƒ‰ƒX‚ÌIndexƒƒ\ƒbƒh‚Ísearchˆø”‚Åó‚¯æ‚ê‚é‚æ‚¤‚É‚È‚éB
+
+ƒy[ƒWƒ“ƒO‚ÌƒŠƒ“ƒN‚àˆÈ‰º‚Ì‚æ‚¤‚ÉC³‚·‚éiƒŠƒXƒg6-23jB
+
+```cshtml
+
+<div>
+    @if (ViewBag.Prev != null )
+    {
+        <a asp-action="Index" asp-route-page="@ViewBag.Prev" asp-route-search="@ViewBag.Search" >prev</a>
+    }
+    else
+    {
+        <span>prev</span>
+    }
+    /
+    @if (ViewBag.Next != null)
+    {
+        <a asp-action="Index" asp-route-page="@ViewBag.Next" asp-route-search="@ViewBag.Search">next</a>
+    }
+    else
+    {
+        <span>next</span>
+    }
+</div>
+```
+
+‚±‚¤‚·‚é‚ÆAƒy[ƒWƒ“ƒO‹@”\‚Æi‚è‚İ‹@”\‚ª“¯‚Ég‚¦‚é‚æ‚¤‚É‚È‚éB
+
+### 6.5.2 Indexƒƒ\ƒbƒh‚ÉŒŸõ‹@”\‚ğ’Ç‰Á‚·‚éB
+
+```csharp
+public async Task<IActionResult> Index(int? page, string search) // (1)
+{
+    if (page == null)
+    {
+        page = 0;
+    }
+    int max = 5;
+
+    var books = from m in _context.Book select m; // (2)
+    if (!string.IsNullOrEmpty(search)) // (3
+    {
+        books = books.Where(b => b.Title.Contains(search)); //(4)
+    }
+    books = books // (5)
+        .Skip(max * page.Value).Take(max)
+        .Include(b => b.Author).Include(b => b.Publisher);
+
+    if (page.Value > 0)
+    {
+        ViewData["prev"] = page.Value - 1;
+    }
+    if (books.Count() >= max)
+    {
+        ViewData["next"] = page.Value + 1;
+        if (_context.Book.Skip(max * (page.Value + 1)).Take(max).Count() == 0)
+        {
+            ViewData["next"] = null;
+        }
+    }
+    ViewData["search"] = search; // (6)
+    return View(await books.ToListAsync()); // (7)
+}
+```
+
+- (1) Indexƒƒ\ƒbƒh‚Ésearchˆø”‚ğ’Ç‰Á‚·‚éB
+- (2) LINQ‚ğg‚Á‚ÄƒNƒGƒŠ‚ğ\’z‚·‚éiÀÛ‚ÉDB‚É–â‚¢‡‚í‚¹‚é‚Ì‚Í(7)jB
+- (3) search‚ªnull‚â‹ó‚Å‚È‚¢‚©‚Ç‚¤‚©‚Å•ªŠòB
+- (4) search‚ªnull‚â‹ó‚Å‚È‚¯‚ê‚ÎAi‚è‚İğŒ‚ğƒNƒGƒŠ‚É’Ç‰ÁB
+- (5) ]—ˆ‚Ìƒy[ƒWƒ“ƒOˆ—‚ÌƒNƒGƒŠB
+- (6) ŒŸõ•¶š—ñ‚ğViewDataƒRƒŒƒNƒVƒ‡ƒ“‚Éİ’èB‚±‚ê‚É‚æ‚Á‚ÄÄ‚Ñ“¯‚¶•¶š—ñ‚ÅŒŸõ‚ğÀs‚Å‚«‚éB
+- (7) ƒNƒGƒŠ‚É]‚Á‚ÄADB‚ÌŒŸõ‚ªÀs‚³‚ê‚éB
+
+### 6.5.3 “®ì‚ğŠm”F‚·‚éB
+
+}6-18A}6-19‚ğQÆB
 
