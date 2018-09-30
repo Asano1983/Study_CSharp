@@ -25,7 +25,7 @@
 
 ### 6.3.3 Ú×ƒy[ƒW‚ÌƒŒƒCƒAƒEƒg•ÏX
 
-Ú×ƒy[ƒW‚Ì’˜ŽÒ–¼Ao”ÅŽÐ–¼‚É‚Â‚¢‚Ä‚àƒNƒŠƒbƒN‚·‚é‚Æ’˜ŽÒ‚ÌÚ×ƒy[ƒWAo”ÅŽÐ‚ÌÚ×‚Ø[‚¶‚ÉƒWƒƒƒ“ƒv‚·‚é‚æ‚¤‚É‚·‚éB
+Ú×ƒy[ƒW‚Ì’˜ŽÒ–¼Ao”ÅŽÐ–¼‚É‚Â‚¢‚Ä‚àƒNƒŠƒbƒN‚·‚é‚Æ’˜ŽÒ‚ÌÚ×ƒy[ƒWAo”ÅŽÐ‚ÌÚ×ƒy[ƒW‚ÉƒWƒƒƒ“ƒv‚·‚é‚æ‚¤‚É‚·‚éB
 ƒŠƒXƒg6-14‚Ì(1)A(2)‚Ì‚æ‚¤‚ÉViews/Books/Details.cshtml‚ð•ÒW‚·‚éB
 
 ```cshtml
@@ -40,8 +40,8 @@
 https://docs.microsoft.com/ja-jp/ef/core/modeling/relationships ‚É‚æ‚é‚Æ
 uˆË‘¶ƒGƒ“ƒeƒBƒeƒB ƒNƒ‰ƒX‚Å’è‹`‚³‚ê‚Ä‚¢‚éŠO•”ƒL[ ƒvƒƒpƒeƒB‚ðŽ‚Â‚±‚Æ‚ð‚¨Š©‚ß‚µ‚Ü‚·‚ªA‚±‚ê‚Í•K—v‚ ‚è‚Ü‚¹‚ñBv
 ‚ç‚µ‚¢‚Å‚·B
-Author‚Íinclude‚µ‚È‚¢‚ÆŽæ“¾‚µ‚È‚¢‚Ì‚ÅiAuthorId‚Íí‚ÉŽæ“¾‚·‚é‚Ì‚ÅjAˆÀ‘S‚È‹C‚à‚µ‚Ü‚·B
-‚Ü‚½ADBã‚ÍAuthorId—ñ‚ª‚ ‚é‚Ì‚ÅA‚ ‚Á‚½•û‚ª•ª‚©‚è‚â‚·‚¢‚Ì‚©‚àB
+AuthorId‚Íí‚ÉDB‚©‚çŽæ“¾‚·‚é‚Ì‚ÅiAuthor‚Íinclude‚µ‚È‚¢‚ÆDB‚©‚çŽæ“¾‚µ‚È‚¢‚Ì‚ÅjAˆÀ‘S‚È‹C‚à‚µ‚Ü‚·B
+‚Ü‚½ADBã‚ÍBookƒe[ƒuƒ‹‚ÉAuthorId—ñ‚ª‚ ‚é‚Ì‚ÅABookƒNƒ‰ƒX‚É‚à‚ ‚Á‚½•û‚ª•ª‚©‚è‚â‚·‚¢‚Ì‚©‚à‚µ‚ê‚Ü‚¹‚ñB
 
 ### 6.3.4 ‘Ðƒy[ƒW‚ÌƒŒƒCƒAƒEƒg•ÏX
 
@@ -61,7 +61,7 @@ Author‚Íinclude‚µ‚È‚¢‚ÆŽæ“¾‚µ‚È‚¢‚Ì‚ÅiAuthorId‚Íí‚ÉŽæ“¾‚·‚é‚Ì‚ÅjAˆÀ‘S‚È‹C‚à‚
 ````
 
 ‚³‚ç‚ÉƒŠƒXƒg6-16‚Ì(3)‚Ì‚æ‚¤‚ÉControllers/AuthorsController.cs‚ð•ÒW‚·‚éB
-iIncludeƒƒ\ƒbƒh‚ðŽg‚Á‚ÄAAuthor‚ðDB‚©‚çŽæ“¾‚·‚é‚Æ‚«‚ÉBook‚àŽæ“¾‚·‚éjB
+iIncludeƒƒ\ƒbƒh‚ðŽg‚Á‚ÄAAuthor‚ðDB‚©‚çŽæ“¾‚·‚é‚Æ‚«‚ÉBookƒvƒƒpƒeƒB‚àŽæ“¾‚·‚éjB
 
 ```csharp
 var author = await _context.Author
@@ -70,12 +70,17 @@ var author = await _context.Author
     .SingleOrDefaultAsync(m => m.Id == id);
 ```
 
-’Fincludeƒƒ\ƒbƒh‚ðŽg‚¤‚ÆAAuthorŽæ“¾Žž‚ÉBookiƒiƒrƒQ[ƒVƒ‡ƒ“ƒvƒƒpƒeƒBj‚Ì“à—e‚àDB‚©‚çŽæ“¾‚·‚é‚æ‚¤‚ÈƒNƒGƒŠiSQL•¶j‚ª”­s‚³‚ê‚éB
-‚±‚Ì—á‚Ìê‡Aƒ‹[ƒv‚ÌŠO‘¤‚ÅiƒRƒ“ƒgƒ[ƒ‰[‘¤‚ÅjBook‚Ì“à—e‚ªŽæ“¾‚Å‚«‚Ä‚¢‚é‚±‚Æ‚É’ˆÓiƒ‹[ƒv‚Ì“à‘¤‚ÅŽæ“¾‚·‚é‚ÆŒø—¦‚ªˆ«‚¢jB
+’‚PFEF Core 1.0‚Ìê‡A6.2.3‚ÅŒ©‚½‚æ‚¤‚Éinclude‚ð•t‚¯‚È‚¢‚ÆBookƒvƒƒpƒeƒB‚Ì’l‚ªnull‚É‚È‚Á‚Ä‚µ‚Ü‚¤i¶¬‚³‚ê‚éhtmlã‚Å‚Í‹ó”’‚Å•\Ž¦jB
+includeƒƒ\ƒbƒh‚ðŽg‚¤‚ÆAAuthorŽæ“¾Žž‚ÉBookiƒiƒrƒQ[ƒVƒ‡ƒ“ƒvƒƒpƒeƒBj‚Ì“à—e‚àDB‚©‚çŽæ“¾‚·‚é‚æ‚¤‚ÈƒNƒGƒŠiSQL•¶j‚ª”­s‚³‚ê‚éB
+
+’‚QFEF Core 2.1‚Å‚Í’x‰„“Ç‚Ýž‚Ý‚ª“±“ü‚³‚ê‚Ä‚¢‚é‚ªAŒø—¦‚É‚Í’ˆÓ‚ª•K—v‚Å‚ ‚ë‚¤B
+‚±‚Ì—á‚Ìê‡Ainclude‚ð•t‚¯‚é‚±‚Æ‚Åƒ‹[ƒv‚ÌŠO‘¤‚ÅiƒRƒ“ƒgƒ[ƒ‰[‘¤‚ÅjBook‚Ì“à—e‚ªDB‚©‚çŽæ“¾‚Å‚«‚Ä‚¢‚é‚ªA
+’x‰„“Ç‚Ýž‚Ý‚É—Š‚é‚Æƒ‹[ƒv‚Ì“à‘¤‚ÅDB‚©‚çŽæ“¾‚·‚é‚±‚Æ‚É‚È‚éŒø—¦‚ªˆ«‚¢B
 Ú‚µ‚­‚Í
 https://docs.microsoft.com/ja-jp/ef/core/querying/related-data
 ‚ðŽQÆB
-EF Core 2.1‚Å‚Í’x‰„“Ç‚Ýž‚Ý‚ª“±“ü‚³‚ê‚Ä‚¢‚é‚ªiEntity Framework‚È‚ç4‚Å‚àŽg‚¦‚é‚ªjAŒø—¦‚É‚Í’ˆÓ‚ª•K—v‚Å‚ ‚ë‚¤B
+
+’‚RFiCoreˆÈ‘O‚ÌjEntity Framework‚É‚Â‚¢‚Ä‚ÍÌ‚©‚çi4ˆÈã‚Åj’x‰„“Ç‚Ýž‚Ý‚ª“±“ü‚³‚ê‚Ä‚¢‚½B
 
 ### 6.3.5 o”ÅŽÐƒy[ƒW‚ÌƒŒƒCƒAƒEƒg‚ð•ÏX
 
@@ -90,6 +95,13 @@ ViewData["Books"]
         select b;
 ```
 
+’F
+‰‰ŽÒ‚ÍƒNƒGƒŠ\•¶‚æ‚èƒƒ\ƒbƒh\•¶‚Ì•û‚ªD‚Ý‚Å‚ ‚éi•·‚©‚ê‚Ä‚È‚¢jB
+
+```csharp
+ViewData["Books"] = _context.Book.Where(b => b.AuthorId == id.Value)
+```
+
 Controller‚É‘Î‰ž‚µ‚È‚¢ModelƒNƒ‰ƒX‚ÌƒvƒƒpƒeƒB‚ðView‚Å•K—v‚Æ‚·‚é‚Æ‚«‚ÍAViewData‚âViewBag‚ðŽg‚Á‚ÄView‚É“n‚·B
 
 ’F‚Æ‚Í‚¢‚¦Šî–{“I‚É‚ÍModelƒNƒ‰ƒX‘¤‚ÉƒvƒƒpƒeƒB‚ðŽ‚½‚¹‚é‚×‚µ‚È‚Ì‚¾‚ë‚¤iViewData‚âViewBag‚ÍƒOƒ[ƒoƒ‹•Ï”‚È‚Ì‚Å——p‹Ö•¨jB
@@ -99,13 +111,15 @@ Controller‚É‘Î‰ž‚µ‚È‚¢ModelƒNƒ‰ƒX‚ÌƒvƒƒpƒeƒB‚ðView‚Å•K—v‚Æ‚·‚é‚Æ‚«‚ÍAViewData‚
 WebƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Å‚ÍAˆê——‚ð•\Ž¦‚·‚é‚Æ‚«‚É­‚µ’ˆÓ‚ª•K—v‚Å‚ ‚éB
 ƒf[ƒ^Œ”‚ª”çŒ‚É‹y‚Ô‚Æ‚«‚ÉA‚»‚Ì‚Ü‚Üˆê——‚ð•\Ž¦‚µ‚Ä‚µ‚Ü‚¤‚ÆƒT[ƒo[‚©‚ç‚Ì‰ž“š‚ª’x‚­‚È‚Á‚½‚èA
 ƒNƒ‰ƒCƒAƒ“ƒg‚Åƒf[ƒ^‚ð•\Ž¦‚Å‚«‚È‚¢ó‘Ô‚ÉŠ×‚Á‚Ä‚µ‚Ü‚¤B
+•\Ž¦Œ”‚ª‘½‚¢ê‡A“¯Žž‚É–â‚¢‡‚í‚¹‚ªW’†‚·‚é‚ÆƒT[ƒo[‚ª‰ž“š‚µ‚È‚­‚È‚Á‚Ä‚µ‚Ü‚¤B
 ‚±‚Ì‚æ‚¤‚Èó‹µ‚ð–h‚®‚½‚ß‚ÉAWebƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Å‚ÍA‚ ‚é’ö“xƒf[ƒ^Œ”‚ª‘½‚¢ê‡‚Íƒuƒ‰ƒEƒU[‚Å•\Ž¦‚·‚éŒ”‚ði‚éB
 ‚±‚ê‚ðuƒy[ƒWƒ“ƒO‹@”\v‚Æ‚¢‚¤B
 
 ### 6.4.1 ƒy[ƒWƒ“ƒO‹@”\‚Ì‚È‚¢ó‘Ô
 
 }6-16 ƒf[ƒ^“]‘—‚ÌƒvƒƒZƒX‚ÌŠT—v‚ðŽQÆB
-‚Ç‚±‚ÅŒ”‚ði‚é‚Ì‚©‚ðl‚¦‚æ‚¤B
+’P‚É•\Ž¦‚·‚é‚Æ‚«‚Éi‚é‚Ì‚Å‚Í‚È‚­AƒRƒ“ƒgƒ[ƒ‰‚©‚çDB‚Ö‚Ì–â‚¢‡‚í‚¹iƒNƒGƒŠj‚ð¶¬‚·‚é‚Æ‚«‚ÉðŒ‚ð•t‚¯‚éB
+‚»‚¤‚·‚é‚±‚Æ‚É‚æ‚Á‚ÄAWebƒT[ƒo[‚ÆDBŠÔ‚Ì•‰‰×‚ðŒ¸‚ç‚·‚±‚Æ‚ª‚Å‚«‚éB
 
 ### 6.4.2 Indexƒƒ\ƒbƒh‚Éƒy[ƒWƒ“ƒO‹@”\‚ðŽÀ‘•‚·‚é
 
@@ -136,12 +150,11 @@ public async Task<IActionResult> Index(int? page) // (1)
             ViewData["next"] = null;
         }
     }
-    ViewData["search"] = search;
     return View(await books.ToListAsync()); // (8)
 }
 ```
 
-- (1) Indexƒƒ\ƒbƒh‚Éint?Œ^‚Ìpageˆø”‚ð’Ç‰ÁB
+- (1) `Index`ƒƒ\ƒbƒh‚É`int?`Œ^‚Ì`page`ˆø”‚ð’Ç‰ÁB
 - (2) `page == null`‚Ì‚Æ‚«‚Í`page = 0`‚É‚È‚é‚æ‚¤‚É‚µ‚ÄÅ‰‚Ìƒy[ƒW‚ª•\Ž¦‚³‚ê‚é‚æ‚¤‚É‚·‚éB
 - (3) 1ƒy[ƒW‚É•\Ž¦‚·‚éÅ‘å—v‘f”‚ðÝ’èB
 - (4) `Skip`‚Æ`Take`‚ðŽg‚Á‚ÄŽw’èƒy[ƒW‚Ìƒf[ƒ^‚Ì‚Ý‚ðDB‚©‚çŽæ“¾B
@@ -176,10 +189,12 @@ Books/Index.cshtml‚à•ÒWB
 </div>
 ```
 
-- (1) BooksController‘¤‚Å`ViewData["prev"]`‚ªÝ’è‚³‚ê‚Ä‚¢‚ê‚ÎA‘Oƒy[ƒW‚ÌƒŠƒ“ƒN‚ð•t‚¯‚éB
-- (2) asp-action, asp-route-page‘®«‚ðŽg‚Á‚ÄƒŠƒ“ƒN‚ð•t‚¯‚éBhref‘®«‚ª http://localhost/Books/Index?page=ƒ‘Sƒy[ƒW”Ô†„ ‚É‚È‚éB
+- (1) `BooksController`‘¤‚Å`ViewData["prev"]`‚ªÝ’è‚³‚ê‚Ä‚¢‚ê‚ÎA‘Oƒy[ƒW‚ÌƒŠƒ“ƒN‚ð•t‚¯‚éB
+- (2) `asp-action`, `asp-route-page`‘®«‚ðŽg‚Á‚ÄƒŠƒ“ƒN‚ð•t‚¯‚éBhref‘®«‚ª http://localhost/Books/Index?page=ƒ‘Sƒy[ƒW”Ô†„ ‚É‚È‚éB
 - (3) `ViewData["prev"]`‚ªÝ’è‚³‚ê‚Ä‚È‚¯‚ê‚ÎAƒŠƒ“ƒN‚Å‚Í‚È‚¢•¶Žš—ñ‚Æ‚µ‚Ä‚Ìuprevv‚¾‚¯‚ð•\Ž¦B
 - (4) ŽŸƒy[ƒWƒŠƒ“ƒN‚à“¯—lB
+
+‚±‚±‚Å‚Íprev‚Ænext‚Ì2‚Â‚Ìƒf[ƒ^‚µ‚©‚È‚¢‚ªA•t‰Á“I‚Èƒf[ƒ^‚ª‘‚¦‚Ä‚«‚½ê‡‚Í“K‹XƒNƒ‰ƒX‚É‚Ü‚Æ‚ß‚é‚ÆŠÇ—‚ª‚µ‚â‚·‚­‚È‚éB
 
 ### 6.4.4 “®ì‚ðŠm”F‚·‚éB
 
@@ -188,7 +203,7 @@ Books/Index.cshtml‚à•ÒWB
 ## 6.5 ˆê——ƒy[ƒW‚ðŒŸõ‚Åi‚èž‚Ý
 
 Indexƒy[ƒW‚É€–Ú‚Ìi‚èž‚Ý‚Ì‹@”\‚ð•t‚¯‚éB
-ƒuƒ‰ƒEƒU[‚Å‘Ð‚Ìƒ^ƒCƒgƒ‹iBook.Titlej‚Ìˆê•”‚ð“ü—Í‚µ‚ÄA‚»‚ÌŒ‹‰Ê‚ª•\Ž¦‚³‚ê‚é‚æ‚¤‚É‚·‚éB
+ƒuƒ‰ƒEƒU[‚Å‘Ð‚Ìƒ^ƒCƒgƒ‹i`Book.Title`j‚Ìˆê•”‚ð“ü—Í‚µ‚ÄA‚»‚ÌŒ‹‰Ê‚ª•\Ž¦‚³‚ê‚é‚æ‚¤‚É‚·‚éB
 ŒŸõŒ‹‰Ê‚ÍIndexƒy[ƒW‚Å—˜—p‚µ‚Ä‚¢‚étableƒ^ƒO‚ð‚»‚Ì‚Ü‚Ü—˜—p‚·‚é‚ªA
 ¤•i‚ÌŽÊ^‚È‚Ç‚ð•À‚×‚ÄŒŸõŒ‹‰Ê‚ÌƒŒƒCƒAƒEƒgƒy[ƒWiSearch.cshtml‚È‚Çj‚ðì‚é‚±‚Æ‚à‚ ‚éB
 
@@ -198,14 +213,14 @@ Indexƒy[ƒW‚É€–Ú‚Ìi‚èž‚Ý‚Ì‹@”\‚ð•t‚¯‚éB
 ƒeƒLƒXƒgƒ{ƒbƒNƒX‚É–¼‚ÉŠÜ‚Ü‚ê‚é•¶Žš—ñ‚ð“ü—Í‚µ‚ÄA[Filter]ƒ{ƒ^ƒ“‚ðƒNƒŠƒbƒN‚µ‚Äi‚èž‚Ý‚ðŽÀs‚·‚éB
 
 ```cshtml
-<form asp-action="Index" method="get">
-    Title: <input type="text" name="search" value="@ViewBag.Search" />
+<form asp-action="Index" method="get"> // (1)
+    Title: <input type="text" name="search" value="@ViewBag.Search" /> // (2)
     <input type="submit" value="Filter" />
 </form>
 ```
 
 - (1) ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ðŽg‚¤‚Ì‚Åformƒ^ƒO‚ðŽg‚¤B
-- (2) ŒŸõ‚·‚é•¶Žš—ñ‚Íinputƒ^ƒO‚ÅŽw’è‚·‚éBname‘®«‚É"search"‚ÆŽw’è‚·‚é‚±‚Æ‚ÅABookControllerƒNƒ‰ƒX‚ÌIndexƒƒ\ƒbƒh‚Ísearchˆø”‚ÅŽó‚¯Žæ‚ê‚é‚æ‚¤‚É‚È‚éB
+- (2) ŒŸõ‚·‚é•¶Žš—ñ‚Íinputƒ^ƒO‚ÅŽw’è‚·‚éBname‘®«‚É"search"‚ÆŽw’è‚·‚é‚±‚Æ‚ÅA`BookController`ƒNƒ‰ƒX‚Ì`Index`ƒƒ\ƒbƒh‚Í`search`ˆø”‚ÅŽó‚¯Žæ‚ê‚é‚æ‚¤‚É‚È‚éB
 
 ƒy[ƒWƒ“ƒO‚ÌƒŠƒ“ƒN‚àˆÈ‰º‚Ì‚æ‚¤‚ÉC³‚·‚éiƒŠƒXƒg6-23jB
 
@@ -271,12 +286,12 @@ public async Task<IActionResult> Index(int? page, string search) // (1)
 }
 ```
 
-- (1) Indexƒƒ\ƒbƒh‚Ésearchˆø”‚ð’Ç‰Á‚·‚éB
+- (1) `Index`ƒƒ\ƒbƒh‚É`search`ˆø”‚ð’Ç‰Á‚·‚éB
 - (2) LINQ‚ðŽg‚Á‚ÄƒNƒGƒŠ‚ð\’z‚·‚éiŽÀÛ‚ÉDB‚É–â‚¢‡‚í‚¹‚é‚Ì‚Í(7)jB
-- (3) search‚ªnull‚â‹ó‚Å‚È‚¢‚©‚Ç‚¤‚©‚Å•ªŠòB
-- (4) search‚ªnull‚â‹ó‚Å‚È‚¯‚ê‚ÎAi‚èž‚ÝðŒ‚ðƒNƒGƒŠ‚É’Ç‰ÁB
+- (3) `search`‚ªnull‚â‹ó‚Å‚È‚¢‚©‚Ç‚¤‚©‚Å•ªŠòB
+- (4) `search`‚ªnull‚â‹ó‚Å‚È‚¯‚ê‚ÎAi‚èž‚ÝðŒ‚ðƒNƒGƒŠ‚É’Ç‰ÁB
 - (5) ]—ˆ‚Ìƒy[ƒWƒ“ƒOˆ—‚ÌƒNƒGƒŠB
-- (6) ŒŸõ•¶Žš—ñ‚ðViewDataƒRƒŒƒNƒVƒ‡ƒ“‚ÉÝ’èB‚±‚ê‚É‚æ‚Á‚ÄÄ‚Ñ“¯‚¶•¶Žš—ñ‚ÅŒŸõ‚ðŽÀs‚Å‚«‚éB
+- (6) ŒŸõ•¶Žš—ñ‚ð`ViewData`ƒRƒŒƒNƒVƒ‡ƒ“‚ÉÝ’èB‚±‚ê‚É‚æ‚Á‚ÄÄ‚Ñ“¯‚¶•¶Žš—ñ‚ÅŒŸõ‚ðŽÀs‚Å‚«‚éB
 - (7) ƒNƒGƒŠ‚É]‚Á‚ÄADB‚ÌŒŸõ‚ªŽÀs‚³‚ê‚éB
 
 ### 6.5.3 “®ì‚ðŠm”F‚·‚éB
